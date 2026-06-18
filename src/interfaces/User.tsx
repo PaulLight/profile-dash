@@ -5,7 +5,12 @@ export interface User {
     email: string;
 }
 
-export interface ProfileCardProps {
+export type FetchState<T> =
+  | { status: 'loading' }
+  | { status: 'error'; message: string }
+  | { status: 'success'; data: T[] };
+
+export interface User {
     id: string;
     name: string;
     username: string;
