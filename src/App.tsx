@@ -4,26 +4,27 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import Todo from './components/Todo'
 import Users from './components/Users'
+import Section from './components/Section'
 
 function App() {
   return (
     <>
-      <section id="center">
+      <Section>
         <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-      </section>
+            <img src={heroImg} className="base" width="170" height="179" alt="" />
+            <img src={reactLogo} className="framework" alt="React logo" />
+            <img src={viteLogo} className="vite" alt="Vite logo" />
+          </div>
+      </Section>
 
       <section id="spacer"></section>
-      <section id="center">
+      <Section title="Users Dashboard">
         <Users />
-      </section>
+      </Section>
       <section id="spacer"></section>
-      <section id="center">
+      <Section title="Todo List">
         <Todo />
-      </section>
+      </Section>
       <section id="spacer"></section>
 
       <div className="ticks"></div>

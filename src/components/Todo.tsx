@@ -19,9 +19,6 @@ function Todo() {
 
     return (
         <div style={{ marginTop: '1rem' }}>
-            <h1>
-                Todo List
-            </h1>
             <button  
                 className="counter" 
                 onClick={() => toggle()} 
