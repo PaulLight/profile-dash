@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { TodoItem } from '../interfaces/Todo'
 
-function useTodo() {
+function useTodo(currentValue: string | null) {
     const [todos, setTodos] = useState<TodoItem[]>([]);
     const [todoItemValue, setTodoItemValue] = useState<string>('');
 
     const setItem = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTodoItemValue(event.target.value);
     }
+
+    const filteredTodos = useMemo((): TodoItem[] => {
+        if (currentValue === 'active') {
+            return todos.filter(item => {
+                return !item.completed 
+            })
+        }
+
+        if (currentValue === 'completed') {
+            return todos.filter(item => {
+                return item.completed 
+            })
+        }
+
+        return todos;
+    }, [todos, currentValue])
 
     const addItem = () => {
         setTodos([...todos, {
@@ -30,7 +46,7 @@ function useTodo() {
     }
 
     return {
-        todos,
+        todos: filteredTodos,
         setItem,
         addItem,
         removeItem,

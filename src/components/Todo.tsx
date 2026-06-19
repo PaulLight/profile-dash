@@ -1,16 +1,16 @@
-import useToggle from '../hooks/useToggle';
+import useSelect from '../hooks/useSelect';
 import type { TodoItem } from '../interfaces/Todo';
 import useTodo from '../hooks/useTodo'
 
 function Todo() {
-    const { toggle, toggleValue } = useToggle();
+    const { selectValue, change } = useSelect();
     const {
         todos,
         setItem,
         addItem,
         removeItem,
         updateItem
-    } = useTodo();
+    } = useTodo(selectValue);
 
     const doneStyling = { 
         opacity: '0.5',
@@ -19,13 +19,11 @@ function Todo() {
 
     return (
         <div style={{ marginTop: '1rem' }}>
-            <button  
-                className="counter" 
-                onClick={() => toggle()} 
-                type="button"
-            >
-                {toggleValue ? 'Show completed' : 'Hide completed'}
-            </button>
+            <select name="filter-list" id="filter-list" onChange={change}>
+                <option value="">All</option>
+                <option value="completed">Completed</option>
+                <option value="active">In Progress</option>
+            </select>
             <div style={{ marginTop: '1rem' }}>
                 <input type="text" onChange={setItem} />
                 <button 
