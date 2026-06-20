@@ -38,12 +38,7 @@ function Todo() {
                     {todos.map((item: TodoItem) => {
                         return (
                             <li 
-                                style={ item.completed 
-                                    ? (toggleValue 
-                                        ? { display: 'none' } 
-                                        : doneStyling) 
-                                    : {} 
-                                }
+                                style={ item.completed ? doneStyling : {} }
                                 key={item.id}>
                                 <input  
                                     type="checkbox"
