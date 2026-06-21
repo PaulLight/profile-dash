@@ -5,6 +5,11 @@ import './App.css'
 import Todo from './components/Todo'
 import Users from './components/Users'
 import Section from './components/Section'
+//import ErrorBoundary from './components/ErrorBoundary'
+import DarkModeSwitcher from './components/DarkModeSwitcher'
+import ThemeContextProvider from './context/ContextProvider'
+import { ErrorBoundary } from 'react-error-boundary';
+
 
 function App() {
   return (
@@ -17,15 +22,23 @@ function App() {
           </div>
       </Section>
 
-      <section id="spacer"></section>
-      <Section title="Users Dashboard">
-        <Users />
-      </Section>
-      <section id="spacer"></section>
-      <Section title="Todo List">
-        <Todo />
-      </Section>
-      <section id="spacer"></section>
+      <ThemeContextProvider>
+        <DarkModeSwitcher />
+        <section id="spacer"></section>
+          <Section title="Users Dashboard">
+            <ErrorBoundary
+              fallback={<p>Users couldn't load. Try refreshing.</p>}
+              onError={(error, info) => console.error('Caught:', error, info)}
+            >
+                <Users />
+            </ErrorBoundary>
+          </Section>
+        <section id="spacer"></section>
+          <Section title="Todo List">
+            <Todo />
+          </Section>
+        <section id="spacer"></section>
+      </ThemeContextProvider>
 
       <div className="ticks"></div>
 

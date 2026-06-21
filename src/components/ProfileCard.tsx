@@ -1,7 +1,9 @@
 import type { User } from "../interfaces/User";
-import './ProfileCard.css'
+import './ProfileCard.css';
+import useTheme from "../context/useTheme";
 
 function ProfileCard({ user }: { user: User }) {
+    const { darkMode } = useTheme();
     const {
         id,
         name,
@@ -17,7 +19,7 @@ function ProfileCard({ user }: { user: User }) {
         : null;
 
     return (
-        <div className="card-wrapper">
+        <div className={`card-wrapper ${darkMode ? 'dark-card-wrapper' : ''}`}>
             <img width="100px" height='100px' src={avatarUrl} alt={name} />
             <div className="card-content">
                 <span>{name}</span>
