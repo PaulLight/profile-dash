@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function ContactForm () {
+    const nameInput = useRef<HTMLInputElement>(null);
+    const prevEmail = useRef<string>('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
@@ -12,9 +14,22 @@ function ContactForm () {
     }
     const handleShow = (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(email);
+        console.log(email); 
         console.log(name);
     }
+
+    const handleClear = () => {
+        setName('');
+        setEmail('');
+        nameInput.current?.focus();
+    }
+
+    useEffect(function setEmailValue() {
+        console.log('Previous email was:', prevEmail?.current);
+        console.log('Current email is:', email);
+        
+        prevEmail.current = email; 
+    }, [email])
 
     return (
         <div>
@@ -22,13 +37,20 @@ function ContactForm () {
                 style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}
                 onSubmit={handleShow}
             >
+                <input ref={nameInput} type="text" name="name" onChange={changeName} />
                 <input type="email" name="email" onChange={changeEmail} />
-                <input type="text" name="name" onChange={changeName} />
                 <button 
                     type="submit"
                     className="counter"
                 >
                     Get Values
+                </button>
+                <button 
+                    type="button"
+                    className="counter"
+                    onClick={handleClear}
+                >
+                    Clear Values
                 </button>
             </form>
         </div>
