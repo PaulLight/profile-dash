@@ -1,9 +1,8 @@
+import { Suspense, lazy } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import Todo from './components/Todo'
-import Users from './components/Users'
 import Section from './components/Section'
 //import ErrorBoundary from './components/ErrorBoundary'
 import DarkModeSwitcher from './components/DarkModeSwitcher'
@@ -11,6 +10,8 @@ import ContactForm from './components/ContactForm'
 import ThemeContextProvider from './context/ContextProvider'
 import { ErrorBoundary } from 'react-error-boundary';
 
+const Users = lazy(() => import('./components/Users'))
+const Todo = lazy(() => import('./components/Todo'));
 
 function App() {
   return (
@@ -27,17 +28,22 @@ function App() {
         <DarkModeSwitcher />
         <section id="spacer"></section>
           <Section title="Users Dashboard">
-            <ErrorBoundary
+            <ErrorBoundary 
               fallback={<p>Users couldn't load. Try refreshing.</p>}
-              onError={(error, info) => console.error('Caught:', error, info)}
-            >
+              onError={(error, info) => console.error('Caught:', error, info)}>
+              <Suspense fallback={<p>Now Loading users...</p>}>
                 <Users />
+              </Suspense>
             </ErrorBoundary>
           </Section>
         <section id="spacer"></section>
-          <Section title="Todo List">
-            <Todo />
-          </Section>
+          <ErrorBoundary fallback={<p>Failed to load this section.</p>}>
+            <Section title="Todo List">
+              <Suspense fallback={<p>Loading...</p>}>
+                <Todo />
+              </Suspense>
+            </Section>
+          </ErrorBoundary>
         <section id="spacer"></section>
       </ThemeContextProvider>
  
