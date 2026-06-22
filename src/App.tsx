@@ -7,6 +7,7 @@ import Section from './components/Section'
 //import ErrorBoundary from './components/ErrorBoundary'
 import DarkModeSwitcher from './components/DarkModeSwitcher'
 import ContactForm from './components/ContactForm'
+/* import Counter from './components/Counter' */
 import ThemeContextProvider from './context/ContextProvider'
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -55,6 +56,15 @@ function App() {
             <ContactForm />
         </ErrorBoundary>
       </Section>
+
+{/*       <Section title="Counter section">
+        <ErrorBoundary
+          fallback={<p>Problems with email form</p>}
+          onError={(error, info) => console.error('Caught:', error, info)}
+        >
+            <Counter />
+        </ErrorBoundary>
+      </Section> */}
 
       <div className="ticks"></div>
 

@@ -37,8 +37,23 @@ function ContactForm () {
                 style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}
                 onSubmit={handleShow}
             >
-                <input ref={nameInput} type="text" name="name" onChange={changeName} />
-                <input type="email" name="email" onChange={changeEmail} />
+                <label htmlFor="contact-name">Enter your name: </label>
+                <input 
+                    ref={nameInput}
+                    type="text"
+                    value={name}
+                    id="contact-name" 
+                    name="contact-name" 
+                    onChange={changeName} 
+                />
+                <label htmlFor="contact-email">Enter your email: </label>
+                <input 
+                    type="email"
+                    value={email} 
+                    id="contact-email" 
+                    name="contact-email" 
+                    onChange={changeEmail} 
+                />
                 <button 
                     type="submit"
                     className="counter"

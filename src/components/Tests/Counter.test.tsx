@@ -10,5 +10,7 @@ describe('Counter', () => {
 
     it('increments when + is clicked', () => {
         render(<Counter />)
+        fireEvent.click(screen.getByText('+'))
+        expect(screen.getByText(/count is 1/i)).toBeInTheDocument()
     })
 })
