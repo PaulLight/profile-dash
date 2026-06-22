@@ -2,7 +2,7 @@
 
 A small React + TypeScript application built to practice modern frontend patterns: typed custom hooks, generics, discriminated unions, context, error boundaries, code-splitting, and component/hook testing.
 
-**Live demo:** [link once deployed]
+**Live demo url:** https://profile-dash-delta.vercel.app/
 **Repo:** https://github.com/PaulLight/profile-dash
 
 ## What it does
